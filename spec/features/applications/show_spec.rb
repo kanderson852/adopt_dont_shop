@@ -66,4 +66,16 @@ describe 'application show page' do
     expect(page).to_not have_content("Status: in progress")
     expect(page).to_not have_content("Add a Pet to this Application")
   end
+
+  it 'I can search for partial name matches' do
+    fill_in 'Pet name', with: "Rus"
+    click_button "Submit"
+    expect(page).to have_content("#{@pet1.name}")
+  end
+
+  it 'Searches are case insensitive' do
+    fill_in 'Pet name', with: "RUSKO"
+    click_button "Submit"
+    expect(page).to have_content("#{@pet1.name}")
+  end
 end
