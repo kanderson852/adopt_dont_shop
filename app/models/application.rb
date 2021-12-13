@@ -9,5 +9,5 @@ class Application < ApplicationRecord
   validates :zip, presence: true
 
   attribute :status, :string, default: "In Progress"
-  attribute :description, :string, default: "Pending"
+  attribute :description, :string, default: ""
 end
