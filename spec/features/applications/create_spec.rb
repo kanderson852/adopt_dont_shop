@@ -11,7 +11,6 @@ RSpec.describe 'application creation' do
       expect(find('form')).to have_content('Address')
       expect(find('form')).to have_content('City')
       expect(find('form')).to have_content('State')
-      expect(find('form')).to have_content('Description')
     end
   end
 
@@ -25,7 +24,6 @@ RSpec.describe 'application creation' do
         fill_in 'City', with: 'Aurora'
         fill_in 'State', with: 'CO'
         fill_in 'Zip', with: '80016'
-        fill_in 'Description', with: 'A description'
         click_button 'Save'
         application = Application.find_by(name: 'Kelly')
         expect(page).to have_current_path("/applications/#{application.id}")
