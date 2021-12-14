@@ -14,3 +14,9 @@
     <%= link_to "Update #{shelter.name}", "/shelters/#{shelter.id}/edit" %>
     <%= link_to "Delete #{shelter.name}", "/shelters/#{shelter.id}", method: :delete %>
 <% end %>
+
+<h4>Shelters with pending Applications:
+  <% @shelters_pending.each do |shelter| %>
+    <%= shelter.name %>
+  <% end %>
+</h4>
