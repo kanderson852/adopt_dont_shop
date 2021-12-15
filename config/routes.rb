@@ -2,8 +2,9 @@ Rails.application.routes.draw do
 
   resources :shelters
   resources :pets
-  namespace :admin do 
-    resources :shelters, :applications
+  namespace :admin do
+    resources :shelters
+    resources :applications
   end
 
   get '/', to: 'application#welcome'
@@ -52,4 +53,5 @@ Rails.application.routes.draw do
   patch '/applications/:id', to: 'applications#update'
   post '/pet_applications/new', to: 'pet_applications#create'
 
+  patch '/admin/applications/:id', to: 'admin/applications#update'
 end
