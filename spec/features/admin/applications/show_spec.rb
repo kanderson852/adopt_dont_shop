@@ -36,7 +36,6 @@ RSpec.describe 'the applications show' do
   it 'Can reject applications' do
     visit "/admin/applications/#{@application1.id}"
     click_button "Reject #{@pet1.name}"
-    save_and_open_page
     expect(current_path).to eq("/admin/applications/#{@application1.id}")
     expect(page).to have_content("Rejected pets: #{@pet1.name}")
   end
