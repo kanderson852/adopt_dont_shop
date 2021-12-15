@@ -40,7 +40,7 @@ RSpec.describe 'the applications show' do
     expect(page).to have_content("Rejected pets: #{@pet1.name}")
   end
 
-  it 'Approved/Rejected Pets on one Application do not affect other Applications' do
+  it 'Approved Pets on one Application do not affect other Applications' do
     @application3 = Application.create!(name:'Josh', address: '14 address', city: 'Foco', state: 'CO', zip: '82016', description: 'xzy', status: 'Pending')
     @pet_application3 = PetApplication.create!(pet_id: @pet1.id, application_id: @application3.id)
     visit "/admin/applications/#{@application1.id}"
@@ -48,5 +48,15 @@ RSpec.describe 'the applications show' do
     visit "/admin/applications/#{@application3.id}"
     expect(page).to have_button("Approve #{@pet1.name}")
     expect(page).to_not have_content("Approved pets: #{@pet1.name}")
-  end 
+  end
+
+  it 'Rejected Pets on one Application do not affect other Applications' do
+    @application3 = Application.create!(name:'Josh', address: '14 address', city: 'Foco', state: 'CO', zip: '82016', description: 'xzy', status: 'Pending')
+    @pet_application3 = PetApplication.create!(pet_id: @pet1.id, application_id: @application3.id)
+    visit "/admin/applications/#{@application1.id}"
+    click_button "Reject #{@pet1.name}"
+    visit "/admin/applications/#{@application3.id}"
+    expect(page).to have_button("Reject #{@pet1.name}")
+    expect(page).to_not have_content("Rejected pets: #{@pet1.name}")
+  end
 end
