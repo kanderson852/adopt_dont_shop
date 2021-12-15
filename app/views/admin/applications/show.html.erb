@@ -1,0 +1,27 @@
+<h1>Application</h1>
+<p>Name: <%= @application.name %></p>
+<p>Address: <%= @application.address %></p>
+<p>City: <%= @application.city %></p>
+<p>State: <%= @application.state %></p>
+<p>Zip: <%= @application.zip %></p>
+<p>Description: <%= @application.description %></p>
+<p>Status: <%= @application.status %></p>
+<p>Pets on this Application: <% @application.pet_applications.each do |pet_app| %>
+  <%= pet_app.pet.name %>
+  <% if pet_app.approval_status == "Pending" %>
+    <%= button_to "Approve #{pet_app.pet.name}", "/admin/applications/#{pet_app.id}", method: :patch, params: { approval_status: "Approved"} %>
+    <%= button_to "Reject #{pet_app.pet.name}", "/admin/applications/#{pet_app.id}", method: :patch, params: { approval_status: "Rejected"} %>
+  <% end %>
+
+  <h4>Approved pets:
+    <% if pet_app.approval_status == "Approved" %>
+      <%= pet_app.pet.name %>
+    <% end %>
+  </h4>
+
+  <h4>Rejected pets:
+    <% if pet_app.approval_status == "Rejected" %>
+      <%= pet_app.pet.name %>
+    <% end %>
+  </h4>
+<% end %> </p>
